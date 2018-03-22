@@ -19,7 +19,7 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
                             type={type} 
                             title={title} 
                             value={row[id]} 
-                            render={render}
+                            render={() => render({id, index, key})}
                             options={options} 
                             disabled={disabled}
                             style={style} 

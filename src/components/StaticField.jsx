@@ -8,7 +8,7 @@ export default ({ id, title, value, render, style }) => (state, actions) => {
   }
   
   return (
-    <div class="form-group">
+    <div class="form-group" key={id}>
       <label >{title}</label>
       <span class="static-field" style={style} id={id}>{value}</span>
     </div>
