@@ -8,7 +8,7 @@ export default ({key, id, type, index}) => (
 
     let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
 
-    if (value === 'number') {
+    if (type === 'number') {
       value = parseFloat(value)
     }
 
