@@ -1,4 +1,4 @@
-export default ({key, id, index}) => (
+export default ({key, id, type, index}) => (
   (state, actions) => {
     let change = {
       model: state.model
@@ -6,7 +6,13 @@ export default ({key, id, index}) => (
 
     change.model[key] = [].concat(state.model[key])
 
-    change.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value
+    let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
+
+    if (value === 'number') {
+      value = parseFloat(value)
+    }
+
+    change.model[key][index][id] = value
 
     return change
   }

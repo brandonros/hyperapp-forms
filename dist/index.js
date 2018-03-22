@@ -40,6 +40,7 @@
   function updateArrayField (ref) {
     var key = ref.key;
     var id = ref.id;
+    var type = ref.type;
     var index = ref.index;
 
     return (
@@ -50,7 +51,13 @@
 
       change.model[key] = [].concat(state.model[key]);
 
-      change.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+      var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+
+      if (value === 'number') {
+        value = parseFloat(value);
+      }
+
+      change.model[key][index][id] = value;
 
       return change
     }
@@ -59,6 +66,7 @@
 
   function updateField (ref) {
     var key = ref.key;
+    var type = ref.type;
     var id = ref.id;
 
     return (
@@ -67,7 +75,13 @@
         model: state.model
       };
 
-      change.model[key][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+      var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+
+      if (value === 'number') {
+        value = parseFloat(value);
+      }
+
+      change.model[key][id] = value;
       
       return change
     }
@@ -285,7 +299,7 @@
             return h( 'br', null );
           }
 
-          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render ? render({id: id, key: key}) : undefined, disabled: disabled, style: style, onChange: type === 'static' ? undefined : function () { return onChange({id: id, key: key}); } }))
+          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render ? render({id: id, key: key}) : undefined, disabled: disabled, style: style, onChange: type === 'static' ? undefined : function () { return onChange({id: id, type: type, key: key}); } }))
         })
     )
   ); };
@@ -318,7 +332,9 @@
                   return h( 'br', null );
                 }
 
-                return h( Field, { id: id, type: type, title: title, value: row[id], render: render ? render({id: id, key: key, index: index}) : undefined, options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, key: key}); } })
+                return (
+                  h( Field, { id: id, type: type, title: title, value: row[id], render: render ? render({id: id, key: key, index: index}) : undefined, options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, type: type, key: key}); } })
+                )
               }),
 
             h( 'div', { class: "text-right" },

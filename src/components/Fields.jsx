@@ -20,7 +20,7 @@ export default ({model, fields, onChange, key}) => (state, actions) => (
                        render={render ? render({id, key}) : undefined}
                        disabled={disabled} 
                        style={style}
-                       onChange={type === 'static' ? undefined : () => onChange({id, key})} />)
+                       onChange={type === 'static' ? undefined : () => onChange({id, type, key})} />)
       })
     }
   </div>

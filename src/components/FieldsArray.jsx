@@ -15,22 +15,24 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
                 return <br />;
               }
 
-              return <Field id={id} 
-                            type={type} 
-                            title={title} 
-                            value={row[id]} 
-                            render={render ? render({id, key, index}) : undefined}
-                            options={options} 
-                            disabled={disabled}
-                            style={style} 
-                            onChange={() => onChange({id, index, key})} />
+              return (
+                <Field id={id} 
+                       type={type} 
+                       title={title} 
+                       value={row[id]} 
+                       render={render ? render({id, key, index}) : undefined}
+                       options={options} 
+                       disabled={disabled}
+                       style={style} 
+                       onChange={() => onChange({id, index, type, key})} />
+              )
             })
           }
 
           <div class="text-right">
             <button type="button" 
                     class="btn btn-link" 
-                    onclick={() => remove({key: key, index: index})}>Remove</button>
+                    onclick={() => remove({key, index})}>Remove</button>
           </div>
         </div>
       ))
