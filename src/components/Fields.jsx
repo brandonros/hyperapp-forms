@@ -12,16 +12,16 @@ export default ({model, fields, onChange, key}) => (state, actions) => (
           return <br />;
         }
 
-        if (render) {
-          debugger;
-        }
+        let wrappedRender =  () => render({id, key})
+
+        console.log(wrappedRender)
 
         return (<Field id={id} 
                        type={type} 
                        title={title} 
                        value={model[id]} 
                        options={options} 
-                       render={(render && type !== 'static') ? () => render({id, key}) : undefined}
+                       render={(render && type !== 'static') ?  wrappedRender : undefined}
                        disabled={disabled} 
                        style={style}
                        onChange={type === 'static' ? undefined : () => onChange({id, key})} />)
