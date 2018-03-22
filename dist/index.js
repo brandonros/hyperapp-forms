@@ -6,9 +6,13 @@
 
   function addObjectToArray (key) { return (
     function (state, actions) {
-      state.model[key] = [].concat(state.model[key], {});
+      var change = {
+        model: {}
+      };
 
-      return state
+      change.model[key] = [].concat(state.model[key], {});
+
+      return change
     }
   ); }
 
@@ -18,11 +22,17 @@
 
     return (
     function (state, actions) {
+      var change = {
+        model: {}
+      };
+
+      change.model[key] = state.model[key];
+
       if (state.model[key].length > 1) {
-        state.model[key] = [].concat(state.model[key].slice(0, index), state.model[key].slice(index + 1));
+        change.model[key] = [].concat(state.model[key].slice(0, index), state.model[key].slice(index + 1));
       }
 
-      return state
+      return change
     }
   );
   }
@@ -34,9 +44,19 @@
 
     return (
     function (state, actions) {
-      state.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+      var change = {
+        model: {}
+      };
 
-      return state
+      change.model[key] = [];
+
+      state.model[key].forEach(function(element) {
+        change.model[key].push(element);
+      });
+
+      change.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+
+      return change
     }
   );
   }
@@ -47,9 +67,15 @@
 
     return (
     function (state, actions) {
-      state.model[key][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+      var change = {
+        model: {}
+      };
+
+      change.model[key] = {};
+
+      change.model[key][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
       
-      return state
+      return change
     }
   );
   }

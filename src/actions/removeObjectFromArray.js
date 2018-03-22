@@ -1,9 +1,15 @@
 export default ({key, index}) => (
   (state, actions) => {
-    if (state.model[key].length > 1) {
-      state.model[key] = [].concat(state.model[key].slice(0, index), state.model[key].slice(index + 1))
+    let change = {
+      model: {}
     }
 
-    return state
+    change.model[key] = state.model[key]
+
+    if (state.model[key].length > 1) {
+      change.model[key] = [].concat(state.model[key].slice(0, index), state.model[key].slice(index + 1))
+    }
+
+    return change
   }
 )

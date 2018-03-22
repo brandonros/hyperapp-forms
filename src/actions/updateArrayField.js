@@ -1,7 +1,17 @@
 export default ({key, id, index}) => (
   (state, actions) => {
-    state.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value
+    var change = {
+      model: {}
+    };
 
-    return state
+    change.model[key] = [];
+
+    state.model[key].forEach(function(element) {
+      change.model[key].push(element)
+    });
+
+    change.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value
+
+    return change
   }
 )

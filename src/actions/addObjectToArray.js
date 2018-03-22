@@ -1,7 +1,11 @@
 export default (key) => (
   (state, actions) => {
-    state.model[key] = [].concat(state.model[key], {})
+    let change = {
+      model: {}
+    }
 
-    return state
+    change.model[key] = [].concat(state.model[key], {})
+
+    return change
   }
 )
