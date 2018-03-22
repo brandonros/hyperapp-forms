@@ -6,11 +6,9 @@
 
   function addObjectToArray (key) { return (
     function (state, actions) {
-      var newState = JSON.parse(JSON.stringify(state));
+      state.model[key] = [].concat(state.model[key], {});
 
-      newState.model[key].push({});
-
-      return newState
+      return state
     }
   ); }
 
@@ -20,13 +18,11 @@
 
     return (
     function (state, actions) {
-      var newState = JSON.parse(JSON.stringify(state));
-
-      if (newState.model[key].length > 1) {
-        newState.model[key].splice(index, 1);
+      if (state.model[key].length > 1) {
+        state.model[key] = [].concat(state.model[key].slice(0, index), state.model[key].slice(index + 1));
       }
 
-      return newState
+      return state
     }
   );
   }
@@ -38,11 +34,9 @@
 
     return (
     function (state, actions) {
-      var newState = JSON.parse(JSON.stringify(state));
+      state.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 
-      newState.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-
-      return newState
+      return state
     }
   );
   }
@@ -53,11 +47,9 @@
 
     return (
     function (state, actions) {
-      var newState = JSON.parse(JSON.stringify(state));
-
-      newState.model[key][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+      state.model[key][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
       
-      return newState
+      return state
     }
   );
   }

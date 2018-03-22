@@ -1,11 +1,9 @@
 export default ({key, index}) => (
   (state, actions) => {
-    let newState = JSON.parse(JSON.stringify(state))
-
-    if (newState.model[key].length > 1) {
-      newState.model[key].splice(index, 1)
+    if (state.model[key].length > 1) {
+      state.model[key] = [].concat(state.model[key].slice(0, index), state.model[key].slice(index + 1))
     }
 
-    return newState
+    return state
   }
 )

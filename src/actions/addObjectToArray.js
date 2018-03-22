@@ -1,9 +1,7 @@
 export default (key) => (
   (state, actions) => {
-    let newState = JSON.parse(JSON.stringify(state))
+    state.model[key] = [].concat(state.model[key], {})
 
-    newState.model[key].push({})
-
-    return newState
+    return state
   }
 )
