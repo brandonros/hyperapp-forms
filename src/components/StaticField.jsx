@@ -2,9 +2,9 @@
 
 import { h } from 'hyperapp'
 
-export default ({ id, title, value, style }) => (state, actions) => {
-  if (typeof value === 'function') {
-    value = value(state)
+export default ({ id, title, value, render, style }) => (state, actions) => {
+  if (typeof render === 'function') {
+    value = render(state)
   }
   
   return (<div class="form-group">

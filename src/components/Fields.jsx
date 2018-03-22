@@ -15,7 +15,7 @@ export default ({model, fields, onChange, key}) => (state, actions) => (
         return (<Field id={id} 
                       type={type} 
                       title={title} 
-                      value={render ? render : model[id]} 
+                      value={model[id]} 
                       options={options} 
                       render={render}
                       disabled={disabled} 
