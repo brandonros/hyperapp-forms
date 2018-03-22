@@ -4,6 +4,7 @@ import { h } from 'hyperapp'
 
 export default ({ id, title, value, disabled, render, style, onChange }) => (state, actions) => {
   if (typeof render === 'function') {
+    console.log(render, render(state))
     value = render(state)
   }
 

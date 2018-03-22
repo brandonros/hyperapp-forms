@@ -141,6 +141,7 @@
 
     return function (state, actions) {
     if (typeof render === 'function') {
+      console.log(render, render(state));
       value = render(state);
     }
 
@@ -167,10 +168,9 @@
 
     return function (state, actions) {
     if (typeof render === 'function') {
+      console.log(render, render(state));
       options = render(state);
     }
-
-    console.log(render, state, options);
 
     return (
       h( 'div', { class: "form-group", key: id },
@@ -223,6 +223,7 @@
 
     return function (state, actions) {
     if (typeof render === 'function') {
+      console.log(render, render(state));
       value = render(state);
     }
 
@@ -320,7 +321,7 @@
                   return h( 'br', null );
                 }
 
-                return h( Field, { id: id, type: type, title: title, value: row[id], render: render && type !== 'static' ? function () { return render({id: id, key: key}); } : undefined, options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, key: key}); } })
+                return h( Field, { id: id, type: type, title: title, value: row[id], render: render && type !== 'static' ? render({id: id, key: key}) : undefined, options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, key: key}); } })
               }),
 
             h( 'div', { class: "text-right" },
