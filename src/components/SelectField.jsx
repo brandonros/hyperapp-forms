@@ -4,10 +4,10 @@ import { h } from 'hyperapp'
 
 export default ({ id, title, value, options, render, disabled, style, onChange }) => (state, actions) => {
   if (typeof render === 'function') {
-    debugger
-    
     options = render(state)
   }
+
+  console.log(render, state, options)
 
   return (
     <div class="form-group" key={id}>
