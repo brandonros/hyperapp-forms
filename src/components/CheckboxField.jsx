@@ -8,7 +8,7 @@ export default ({ id, title, value, disabled, style, onChange }) => (state, acti
   }
 
   return (
-    <div class="form-group">
+    <div class="form-group" key={id}>
       <label >{title}</label>
       <input class="form-control" 
              type="checkbox" 

@@ -120,7 +120,7 @@
     }
 
     return (
-      h( 'div', { class: "form-group" },
+      h( 'div', { class: "form-group", key: id },
         h( 'label', null, title ),
         h( 'input', { class: "form-control", type: "checkbox", id: id, style: style, checked: value ? 'checked' : '', disabled: disabled ? 'disabled' : '', onchange: onChange })
       )
@@ -145,7 +145,7 @@
     }
 
     return (
-      h( 'div', { class: "form-group" },
+      h( 'div', { class: "form-group", key: id },
         h( 'label', null, title ),
         h( 'input', { class: "form-control", type: "number", id: id, value: value, style: style, disabled: disabled ? 'disabled' : '', onkeyup: onChange })
       )
@@ -171,11 +171,11 @@
     }
 
     return (
-      h( 'div', { class: "form-group" },
+      h( 'div', { class: "form-group", key: id },
         h( 'label', null, title ),
         h( 'select', { class: "form-control", id: id, style: style, disabled: disabled ? 'disabled' : '', onchange: onChange },
           [].concat('', options).map(function (option) { return (
-              h( 'option', { value: typeof option === 'object' ? option.name : option, selected: (typeof option === 'object' ? option.name : option) === value ? 'selected' : '' },
+              h( 'option', { value: typeof option === 'object' ? option.name : option, selected: (typeof option === 'object' ? option.name : option) === value ? 'selected' : '', key: typeof option === 'object' ? option.name : option },
                 typeof option === 'object' ? option.name : option
               )
             ); })

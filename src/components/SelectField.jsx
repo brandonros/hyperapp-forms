@@ -8,7 +8,7 @@ export default ({ id, title, value, options, render, disabled, style, onChange }
   }
 
   return (
-    <div class="form-group">
+    <div class="form-group" key={id}>
       <label >{title}</label>
       <select class="form-control" 
               id={id} 
@@ -18,7 +18,8 @@ export default ({ id, title, value, options, render, disabled, style, onChange }
         {
           [].concat('', options).map((option) => (
             <option value={typeof option === 'object' ? option.name : option} 
-                    selected={(typeof option === 'object' ? option.name : option) === value ? 'selected' : ''}>
+                    selected={(typeof option === 'object' ? option.name : option) === value ? 'selected' : ''}
+                    key={typeof option === 'object' ? option.name : option}>
               {typeof option === 'object' ? option.name : option}
             </option>
           ))

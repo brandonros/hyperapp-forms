@@ -13,14 +13,14 @@ export default ({model, fields, onChange, key}) => (state, actions) => (
         }
 
         return (<Field id={id} 
-                      type={type} 
-                      title={title} 
-                      value={model[id]} 
-                      options={options} 
-                      render={render}
-                      disabled={disabled} 
-                      style={style}
-                      onChange={type === 'static' ? undefined : () => onChange({id, key})} />)
+                       type={type} 
+                       title={title} 
+                       value={model[id]} 
+                       options={options} 
+                       render={render}
+                       disabled={disabled} 
+                       style={style}
+                       onChange={type === 'static' ? undefined : () => onChange({id, key})} />)
       })
     }
   </div>
