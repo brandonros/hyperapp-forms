@@ -53,8 +53,6 @@
 
       var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 
-      console.log(type);
-
       if (type === 'number') {
         value = parseFloat(value);
       }
@@ -78,8 +76,6 @@
       };
 
       var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-
-      console.log(type);
 
       if (type === 'number') {
         value = parseFloat(value);
