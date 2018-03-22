@@ -248,13 +248,13 @@
 
     return function (state, actions) {
     if (type === 'static') {
-      return h( StaticField, { id: id, title: title, value: value, style: style })
+      return h( StaticField, { id: id, title: title, value: value, style: style, render: render })
     } else if (type === 'text') {
-      return h( TextField, { id: id, title: title, value: value, disabled: disabled, style: style, onChange: onChange })
+      return h( TextField, { id: id, title: title, value: value, disabled: disabled, render: render, style: style, onChange: onChange })
     } else if (type === 'checkbox') {
-      return h( CheckboxField, { id: id, title: title, value: value, disabled: disabled, style: style, onChange: onChange })
+      return h( CheckboxField, { id: id, title: title, value: value, disabled: disabled, style: style, render: render, onChange: onChange })
     } else if (type === 'number') {
-      return h( NumberField, { id: id, title: title, value: value, disabled: disabled, style: style, onChange: onChange })
+      return h( NumberField, { id: id, title: title, value: value, disabled: disabled, style: style, render: render, onChange: onChange })
     } else if (type === 'select') {
       return h( SelectField, { id: id, title: title, value: value, disabled: disabled, options: options, render: render, style: style, onChange: onChange })
     }

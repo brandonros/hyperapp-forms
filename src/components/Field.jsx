@@ -13,12 +13,14 @@ export default ({ id, type, title, value, options, disabled, style, render, onCh
     return <StaticField id={id} 
                         title={title} 
                         value={value}
-                        style={style} />
+                        style={style}
+                        render={render} />
   } else if (type === 'text') {
     return <TextField id={id} 
                       title={title} 
                       value={value} 
                       disabled={disabled}
+                      render={render}
                       style={style} 
                       onChange={onChange} />
   } else if (type === 'checkbox') {
@@ -27,6 +29,7 @@ export default ({ id, type, title, value, options, disabled, style, render, onCh
                           value={value} 
                           disabled={disabled}
                           style={style} 
+                          render={render}
                           onChange={onChange} />
   } else if (type === 'number') {
     return <NumberField id={id} 
@@ -34,6 +37,7 @@ export default ({ id, type, title, value, options, disabled, style, render, onCh
                         value={value} 
                         disabled={disabled} 
                         style={style}
+                        render={render}
                         onChange={onChange} />
   } else if (type === 'select') {
     return <SelectField id={id} 
