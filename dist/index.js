@@ -48,11 +48,7 @@
         model: {}
       };
 
-      change.model[key] = [];
-
-      state.model[key].forEach(function(element) {
-        change.model[key].push(element);
-      });
+      change.model[key] = [].concat(state.model[key]);
 
       change.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 
@@ -71,7 +67,7 @@
         model: {}
       };
 
-      change.model[key] = {};
+      change.model[key] = state.model[key];
 
       change.model[key][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
       
