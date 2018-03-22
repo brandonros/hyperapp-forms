@@ -7,7 +7,7 @@
     "name": "Brandon Ros"
   },
   "scripts": {
-    "build": "./node_modules/.bin/webpack"
+    "build": "./node_modules/.bin/rollup -c -i src/index.js -o dist/index.js -m -f umd -n hyperapp-forms"
   },
   "license": "ISC",
   "dependencies": {
@@ -20,7 +20,9 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "rollup": "^0.57.1",
-    "webpack": "^4.2.0",
-    "webpack-cli": "^2.0.12"
+    "rollup-plugin-buble": "^0.19.2",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0"
   }
 }
