@@ -8,7 +8,7 @@ import CheckboxField from './CheckboxField.jsx'
 import NumberField from './NumberField.jsx'
 import SelectField from './SelectField.jsx'
 
-export default ({ id, type, title, value, options, disabled, style, onChange }) => (state, actions) => {
+export default ({ id, type, title, value, options, disabled, style, render, onChange }) => (state, actions) => {
   if (type === 'static') {
     return <StaticField id={id} 
                         title={title} 
