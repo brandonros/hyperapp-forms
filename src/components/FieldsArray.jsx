@@ -15,7 +15,7 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
                 return <br />;
               }
 
-              let wrappedRender = render({id, key, index})
+              let wrappedRender = render ? render({id, key, index}) : undefined
 
               console.log(wrappedRender)
 
@@ -23,7 +23,7 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
                             type={type} 
                             title={title} 
                             value={row[id]} 
-                            render={(render && type !== 'static') ?  wrappedRender : undefined}
+                            render={wrappedRender}
                             options={options} 
                             disabled={disabled}
                             style={style} 
