@@ -1,2 +1,320 @@
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e["hyperapp-forms"]=t()}(this,function(){"use strict";function e(e,t){for(var n=arguments,i=[],r=[],l=arguments.length;l-- >2;)i.push(n[l]);for(;i.length;){var o=i.pop();if(o&&o.pop)for(l=o.length;l--;)i.push(o[l]);else null!=o&&!0!==o&&!1!==o&&r.push(o)}return"function"==typeof e?e(t||{},r):{nodeName:e,attributes:t||{},children:r,key:t&&t.key}}function t(t){var n=t.id,i=t.title,r=t.value,l=t.disabled,o=t.style,d=t.onChange;return function(t,a){return e("div",{class:"form-group"},e("label",null,i),e("input",{class:"form-control",type:"checkbox",id:n,style:o,checked:r?"checked":"",disabled:l?"disabled":"",onchange:d}))}}function n(t){var n=t.id,i=t.title,r=t.value,l=t.disabled,o=t.style,d=t.onChange;return function(t,a){return e("div",{class:"form-group"},e("label",null,i),e("input",{class:"form-control",type:"number",id:n,value:r,style:o,disabled:l?"disabled":"",onkeyup:d}))}}function i(t){var n=t.id,i=t.title,r=t.value,l=t.options,o=t.render,d=t.disabled,a=t.style,u=t.onChange;return function(t,s){return"function"==typeof o&&(l=o(t)),console.log(n,o,t,l),e("div",{class:"form-group"},e("label",null,i),e("select",{class:"form-control",id:n,style:a,disabled:d?"disabled":"",onchange:u},[].concat("",l).map(function(t){return e("option",{value:"object"==typeof t?t.name:t,selected:("object"==typeof t?t.name:t)===r?"selected":""},"object"==typeof t?t.name:t)})))}}function r(t){var n=t.id,i=t.title,r=t.value,l=t.render,o=t.style;return function(t,d){return"function"==typeof l&&(r=l(t)),e("div",{class:"form-group"},e("label",null,i),e("span",{class:"static-field",style:o,id:n},r))}}function l(t){var n=t.id,i=t.title,r=t.value,l=t.disabled,o=t.style,d=t.onChange;return function(t,a){return e("div",{class:"form-group"},e("label",null,i),e("input",{class:"form-control",type:"text",id:n,value:r,onkeyup:d,style:o,disabled:l?"disabled":""}))}}function o(o){var d=o.id,a=o.type,u=o.title,s=o.value,c=o.options,f=o.disabled,p=o.style,v=o.render,y=o.onChange;return function(o,b){return"static"===a?e(r,{id:d,title:u,value:s,style:p}):"text"===a?e(l,{id:d,title:u,value:s,disabled:f,style:p,onChange:y}):"checkbox"===a?e(t,{id:d,title:u,value:s,disabled:f,style:p,onChange:y}):"number"===a?e(n,{id:d,title:u,value:s,disabled:f,style:p,onChange:y}):"select"===a?e(i,{id:d,title:u,value:s,disabled:f,options:c,render:v,style:p,onChange:y}):void 0}}return{addObjectToArray:function(e){return function(t,n){var i=JSON.parse(JSON.stringify(t));return i.model[e].push({}),i}},removeObjectFromArray:function(e){var t=e.key,n=e.index;return function(e,i){var r=JSON.parse(JSON.stringify(e));return r.model[t].length>1&&r.model[t].splice(n,1),r}},updateArrayField:function(e){var t=e.key,n=e.id,i=e.index;return function(e,r){var l=JSON.parse(JSON.stringify(e));return l.model[t][i][n]="checkbox"===event.target.type?event.target.checked:event.target.value,l}},updateField:function(e){var t=e.key,n=e.id;return function(e,i){var r=JSON.parse(JSON.stringify(e));return r.model[t][n]="checkbox"===event.target.type?event.target.checked:event.target.value,r}},CheckboxField:t,NumberField:n,SelectField:i,StaticField:r,TextField:l,Field:o,Fields:function(t){var n=t.model,i=t.fields,r=t.onChange,l=t.key;return function(t,d){return e("div",{class:"form-inline"},i.map(function(t,i){var d=t.id,a=t.type,u=t.title,s=(t.value,t.options),c=t.disabled,f=t.style,p=t.render;return"divider"===a?e("br",null):e(o,{id:d,type:a,title:u,value:n[d],options:s,render:p,disabled:c,style:f,onChange:"static"===a?void 0:function(){return r({id:d,key:l})}})}))}},FieldsArray:function(t){var n=t.model,i=t.fields,r=t.onChange,l=t.remove,d=t.key;return function(t,a){return e("div",{class:"form-inline"},n.map(function(t,n){return e("div",null,i.map(function(i){var l=i.id,a=i.type,u=i.title,s=(i.value,i.disabled),c=i.style,f=i.options,p=i.render;return"divider"===a?e("br",null):e(o,{id:l,type:a,title:u,value:t[l],render:p,options:f,disabled:s,style:c,onChange:function(){return r({id:l,index:n,key:d})}})}),e("div",{class:"text-right"},e("button",{type:"button",class:"btn btn-link",onclick:function(){return l({key:d,index:n})}},"Remove")))}))}}}});
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global['hyperapp-forms'] = factory());
+}(this, (function () { 'use strict';
+
+  function addObjectToArray (key) { return (
+    function (state, actions) {
+      var newState = JSON.parse(JSON.stringify(state));
+
+      newState.model[key].push({});
+
+      return newState
+    }
+  ); }
+
+  function removeObjectFromArray (ref) {
+    var key = ref.key;
+    var index = ref.index;
+
+    return (
+    function (state, actions) {
+      var newState = JSON.parse(JSON.stringify(state));
+
+      if (newState.model[key].length > 1) {
+        newState.model[key].splice(index, 1);
+      }
+
+      return newState
+    }
+  );
+  }
+
+  function updateArrayField (ref) {
+    var key = ref.key;
+    var id = ref.id;
+    var index = ref.index;
+
+    return (
+    function (state, actions) {
+      var newState = JSON.parse(JSON.stringify(state));
+
+      newState.model[key][index][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+
+      return newState
+    }
+  );
+  }
+
+  function updateField (ref) {
+    var key = ref.key;
+    var id = ref.id;
+
+    return (
+    function (state, actions) {
+      var newState = JSON.parse(JSON.stringify(state));
+
+      newState.model[key][id] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+      
+      return newState
+    }
+  );
+  }
+
+  function h(name, attributes) {
+    var arguments$1 = arguments;
+
+    var rest = [];
+    var children = [];
+    var length = arguments.length;
+
+    while (length-- > 2) { rest.push(arguments$1[length]); }
+
+    while (rest.length) {
+      var node = rest.pop();
+      if (node && node.pop) {
+        for (length = node.length; length--; ) {
+          rest.push(node[length]);
+        }
+      } else if (node != null && node !== true && node !== false) {
+        children.push(node);
+      }
+    }
+
+    return typeof name === "function"
+      ? name(attributes || {}, children)
+      : {
+          nodeName: name,
+          attributes: attributes || {},
+          children: children,
+          key: attributes && attributes.key
+        }
+  }
+
+  // @jsx h 
+
+  function CheckboxField (ref) {
+    var id = ref.id;
+    var title = ref.title;
+    var value = ref.value;
+    var disabled = ref.disabled;
+    var style = ref.style;
+    var onChange = ref.onChange;
+
+    return function (state, actions) { return (
+    h( 'div', { class: "form-group" },
+      h( 'label', null, title ),
+      h( 'input', { class: "form-control", type: "checkbox", id: id, style: style, checked: value ? 'checked' : '', disabled: disabled ? 'disabled' : '', onchange: onChange })
+    )
+  ); };
+  }
+
+  // @jsx h 
+
+  function NumberField (ref) {
+    var id = ref.id;
+    var title = ref.title;
+    var value = ref.value;
+    var disabled = ref.disabled;
+    var style = ref.style;
+    var onChange = ref.onChange;
+
+    return function (state, actions) { return (
+    h( 'div', { class: "form-group" },
+      h( 'label', null, title ),
+      h( 'input', { class: "form-control", type: "number", id: id, value: value, style: style, disabled: disabled ? 'disabled' : '', onkeyup: onChange })
+    )
+  ); };
+  }
+
+  // @jsx h 
+
+  function SelectField (ref) {
+    var id = ref.id;
+    var title = ref.title;
+    var value = ref.value;
+    var options = ref.options;
+    var render = ref.render;
+    var disabled = ref.disabled;
+    var style = ref.style;
+    var onChange = ref.onChange;
+
+    return function (state, actions) {
+    if (typeof render === 'function') {
+      options = render(state);
+    }
+
+    console.log(id, render, state, options);
+
+    return (h( 'div', { class: "form-group" },
+      h( 'label', null, title ),
+      h( 'select', { class: "form-control", id: id, style: style, disabled: disabled ? 'disabled' : '', onchange: onChange },
+        [].concat('', options).map(function (option) { return (
+            h( 'option', { value: typeof option === 'object' ? option.name : option, selected: (typeof option === 'object' ? option.name : option) === value ? 'selected' : '' },
+              typeof option === 'object' ? option.name : option
+            )
+          ); })
+      )
+    ))
+  };
+  }
+
+  // @jsx h 
+
+  function StaticField (ref) {
+    var id = ref.id;
+    var title = ref.title;
+    var value = ref.value;
+    var render = ref.render;
+    var style = ref.style;
+
+    return function (state, actions) {
+    if (typeof render === 'function') {
+      value = render(state);
+    }
+    
+    return (h( 'div', { class: "form-group" },
+      h( 'label', null, title ),
+      h( 'span', { class: "static-field", style: style, id: id }, value)
+    ))
+  };
+  }
+
+  // @jsx h 
+
+  function TextField (ref) {
+    var id = ref.id;
+    var title = ref.title;
+    var value = ref.value;
+    var disabled = ref.disabled;
+    var style = ref.style;
+    var onChange = ref.onChange;
+
+    return function (state, actions) { return (
+    h( 'div', { class: "form-group" },
+      h( 'label', null, title ),
+      h( 'input', { class: "form-control", type: "text", id: id, value: value, onkeyup: onChange, style: style, disabled: disabled ? 'disabled' : '' })
+    )
+  ); };
+  }
+
+  // @jsx h 
+
+  function Field (ref) {
+    var id = ref.id;
+    var type = ref.type;
+    var title = ref.title;
+    var value = ref.value;
+    var options = ref.options;
+    var disabled = ref.disabled;
+    var style = ref.style;
+    var render = ref.render;
+    var onChange = ref.onChange;
+
+    return function (state, actions) {
+    if (type === 'static') {
+      return h( StaticField, { id: id, title: title, value: value, style: style })
+    } else if (type === 'text') {
+      return h( TextField, { id: id, title: title, value: value, disabled: disabled, style: style, onChange: onChange })
+    } else if (type === 'checkbox') {
+      return h( CheckboxField, { id: id, title: title, value: value, disabled: disabled, style: style, onChange: onChange })
+    } else if (type === 'number') {
+      return h( NumberField, { id: id, title: title, value: value, disabled: disabled, style: style, onChange: onChange })
+    } else if (type === 'select') {
+      return h( SelectField, { id: id, title: title, value: value, disabled: disabled, options: options, render: render, style: style, onChange: onChange })
+    }
+  };
+  }
+
+  // @jsx h 
+
+  function Fields (ref) {
+    var model = ref.model;
+    var fields = ref.fields;
+    var onChange = ref.onChange;
+    var key = ref.key;
+
+    return function (state, actions) { return (
+    h( 'div', { class: "form-inline" },
+      fields.map(function (ref, index) {
+          var id = ref.id;
+          var type = ref.type;
+          var title = ref.title;
+          var value = ref.value;
+          var options = ref.options;
+          var disabled = ref.disabled;
+          var style = ref.style;
+          var render = ref.render;
+
+          if (type === 'divider') {
+            return h( 'br', null );
+          }
+
+          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render, disabled: disabled, style: style, onChange: type === 'static' ? undefined : function () { return onChange({id: id, key: key}); } }))
+        })
+    )
+  ); };
+  }
+
+  // @jsx h 
+
+  function FieldsArray (ref) {
+    var model = ref.model;
+    var fields = ref.fields;
+    var onChange = ref.onChange;
+    var remove = ref.remove;
+    var key = ref.key;
+
+    return function (state, actions) { return (
+    h( 'div', { class: "form-inline" },
+      model.map(function (row, index) { return (
+          h( 'div', null,
+            fields.map(function (ref) {
+                var id = ref.id;
+                var type = ref.type;
+                var title = ref.title;
+                var value = ref.value;
+                var disabled = ref.disabled;
+                var style = ref.style;
+                var options = ref.options;
+                var render = ref.render;
+
+                if (type === 'divider') {
+                  return h( 'br', null );
+                }
+
+                return h( Field, { id: id, type: type, title: title, value: row[id], render: render, options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, key: key}); } })
+              }),
+
+            h( 'div', { class: "text-right" },
+              h( 'button', { type: "button", class: "btn btn-link", onclick: function () { return remove({key: key, index: index}); } }, "Remove")
+            )
+          )
+        ); })
+    )
+  ); };
+  }
+
+  var index = {
+    /* actions */
+    addObjectToArray: addObjectToArray,
+    removeObjectFromArray: removeObjectFromArray,
+    updateArrayField: updateArrayField,
+    updateField: updateField,
+
+    /* compoents */
+    CheckboxField: CheckboxField,
+    NumberField: NumberField,
+    SelectField: SelectField,
+    StaticField: StaticField,
+    TextField: TextField,
+    Field: Field,
+    Fields: Fields,
+    FieldsArray: FieldsArray
+  }
+
+  return index;
+
+})));
 //# sourceMappingURL=index.js.map

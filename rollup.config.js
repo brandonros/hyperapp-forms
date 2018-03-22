@@ -7,7 +7,7 @@ export default {
   plugins: [
     buble({ jsx: "h" }),
     resolve(),
-    commonjs(),
-    uglify()
+    commonjs()
+    //uglify()
   ]
 }
