@@ -41,6 +41,7 @@ export default ({ id, type, title, value, options, disabled, style, onChange }) 
                         value={value} 
                         disabled={disabled} 
                         options={options}
+                        render={render}
                         style={style} 
                         onChange={onChange} />
   }

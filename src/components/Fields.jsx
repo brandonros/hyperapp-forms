@@ -17,6 +17,7 @@ export default ({model, fields, onChange, key}) => (state, actions) => (
                       title={title} 
                       value={render ? render : model[id]} 
                       options={options} 
+                      render={render}
                       disabled={disabled} 
                       style={style}
                       onChange={type === 'static' ? undefined : () => onChange({id, key})} />)

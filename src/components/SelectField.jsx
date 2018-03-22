@@ -2,10 +2,12 @@
 
 import { h } from 'hyperapp'
 
-export default ({ id, title, value, options, disabled, style, onChange }) => (state, actions) => {
-  if (typeof options === 'function') {
-    options = options(state)
+export default ({ id, title, value, options, render, disabled, style, onChange }) => (state, actions) => {
+  if (typeof render === 'function') {
+    options = render(state)
   }
+
+  console.log(options)
 
   return (<div class="form-group">
     <label >{title}</label>
