@@ -7,7 +7,7 @@ export default ({ id, title, value, options, render, disabled, style, onChange }
     options = render(state)
   }
 
-  console.log(options)
+  console.log(id, render, state, options)
 
   return (<div class="form-group">
     <label >{title}</label>
