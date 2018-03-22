@@ -1,7 +1,7 @@
 export default ({key, index}) => (
   (state, actions) => {
     let change = {
-      model: {}
+      model: state.model
     }
 
     change.model[key] = state.model[key]
