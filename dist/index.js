@@ -249,8 +249,6 @@
     var onChange = ref.onChange;
 
     return function (state, actions) {
-    console.log(render);
-    
     if (type === 'static') {
       return h( StaticField, { id: id, title: title, value: value, style: style, render: render })
     } else if (type === 'text') {
