@@ -141,7 +141,6 @@
 
     return function (state, actions) {
     if (typeof render === 'function') {
-      console.log(render, render(state));
       value = render(state);
     }
 
@@ -168,7 +167,6 @@
 
     return function (state, actions) {
     if (typeof render === 'function') {
-      console.log(render, render(state));
       options = render(state);
     }
 
@@ -223,7 +221,6 @@
 
     return function (state, actions) {
     if (typeof render === 'function') {
-      console.log(render, render(state));
       value = render(state);
     }
 
@@ -288,11 +285,7 @@
             return h( 'br', null );
           }
 
-          var wrappedRender = render ? render({id: id, key: key}) : undefined;
-
-          console.log(wrappedRender);
-
-          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: wrappedRender, disabled: disabled, style: style, onChange: type === 'static' ? undefined : function () { return onChange({id: id, key: key}); } }))
+          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render ? render({id: id, key: key}) : undefined, disabled: disabled, style: style, onChange: type === 'static' ? undefined : function () { return onChange({id: id, key: key}); } }))
         })
     )
   ); };
@@ -325,11 +318,7 @@
                   return h( 'br', null );
                 }
 
-                var wrappedRender = render ? render({id: id, key: key, index: index}) : undefined;
-
-                console.log(wrappedRender);
-
-                return h( Field, { id: id, type: type, title: title, value: row[id], render: wrappedRender, options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, key: key}); } })
+                return h( Field, { id: id, type: type, title: title, value: row[id], render: render ? render({id: id, key: key, index: index}) : undefined, options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, key: key}); } })
               }),
 
             h( 'div', { class: "text-right" },

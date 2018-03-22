@@ -15,15 +15,11 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
                 return <br />;
               }
 
-              let wrappedRender = render ? render({id, key, index}) : undefined
-
-              console.log(wrappedRender)
-
               return <Field id={id} 
                             type={type} 
                             title={title} 
                             value={row[id]} 
-                            render={wrappedRender}
+                            render={render ? render({id, key, index}) : undefined}
                             options={options} 
                             disabled={disabled}
                             style={style} 
