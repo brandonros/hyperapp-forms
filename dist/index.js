@@ -147,7 +147,7 @@
     return (
       h( 'div', { class: "form-group", key: id },
         h( 'label', null, title ),
-        h( 'input', { class: "form-control", type: "number", id: id, value: value, style: style, disabled: disabled ? 'disabled' : '', onkeyup: onChange })
+        h( 'input', { class: "form-control", type: "number", id: id, value: value, style: style, disabled: disabled ? 'disabled' : '', oninput: onChange })
       )
     )
   };
@@ -225,9 +225,9 @@
     }
 
     return (
-      h( 'div', { class: "form-group" },
+      h( 'div', { class: "form-group", key: id },
         h( 'label', null, title ),
-        h( 'input', { class: "form-control", type: "text", id: id, value: value, onkeyup: onChange, style: style, disabled: disabled ? 'disabled' : '' })
+        h( 'input', { class: "form-control", type: "text", id: id, value: value, oninput: onChange, style: style, disabled: disabled ? 'disabled' : '' })
       )
     )
   };

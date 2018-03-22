@@ -8,13 +8,13 @@ export default ({ id, title, value, disabled, style, render, onChange }) => (sta
   }
 
   return (
-    <div class="form-group">
+    <div class="form-group" key={id}>
       <label >{title}</label>
       <input class="form-control" 
              type="text" 
              id={id} 
              value={value} 
-             onkeyup={onChange} 
+             oninput={onChange} 
              style={style}
              disabled={disabled ? 'disabled' : ''} />
     </div>

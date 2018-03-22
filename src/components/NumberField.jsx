@@ -16,7 +16,7 @@ export default ({ id, title, value, disabled, render, style, onChange }) => (sta
              value={value} 
              style={style}
              disabled={disabled ? 'disabled' : ''} 
-             onkeyup={onChange} />
+             oninput={onChange} />
     </div>
   )
 }
