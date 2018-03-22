@@ -12,6 +12,10 @@ export default ({model, fields, onChange, key}) => (state, actions) => (
           return <br />;
         }
 
+        if (type !== 'static' && render) {
+          debugger
+        }
+
         return (<Field id={id} 
                        type={type} 
                        title={title} 

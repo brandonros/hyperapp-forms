@@ -285,6 +285,10 @@
             return h( 'br', null );
           }
 
+          if (type !== 'static' && render) {
+            debugger
+          }
+
           return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render ? (type === 'static' ? undefined : function () { return render({id: id, key: key}); }) : undefined, disabled: disabled, style: style, onChange: type === 'static' ? undefined : function () { return onChange({id: id, key: key}); } }))
         })
     )
