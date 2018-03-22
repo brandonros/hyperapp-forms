@@ -288,7 +288,7 @@
             return h( 'br', null );
           }
 
-          var wrappedRender =  function () { return render({id: id, key: key}); };
+          var wrappedRender = render({id: id, key: key});
 
           console.log(wrappedRender);
 
@@ -325,7 +325,7 @@
                   return h( 'br', null );
                 }
 
-                var wrappedRender =  function () { return render({id: id, key: key, index: index}); };
+                var wrappedRender = render({id: id, key: key, index: index});
 
                 console.log(wrappedRender);
 

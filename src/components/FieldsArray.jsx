@@ -15,7 +15,7 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
                 return <br />;
               }
 
-              let wrappedRender =  () => render({id, key, index})
+              let wrappedRender = render({id, key, index})
 
               console.log(wrappedRender)
 
