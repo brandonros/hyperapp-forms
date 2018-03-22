@@ -30,7 +30,7 @@ console.log({
   FieldsArray
 })
 
-export {
+export default {
   /* actions */
   addObjectToArray,
   removeObjectFromArray,
