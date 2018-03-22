@@ -285,7 +285,7 @@
             return h( 'br', null );
           }
 
-          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render && (type === 'static' ? undefined : function () { return render({id: id, key: key}); }), disabled: disabled, style: style, onChange: type === 'static' ? undefined : function () { return onChange({id: id, key: key}); } }))
+          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render ? (type === 'static' ? undefined : function () { return render({id: id, key: key}); }) : undefined, disabled: disabled, style: style, onChange: type === 'static' ? undefined : function () { return onChange({id: id, key: key}); } }))
         })
     )
   ); };
@@ -318,7 +318,7 @@
                   return h( 'br', null );
                 }
 
-                return h( Field, { id: id, type: type, title: title, value: row[id], render: render && (type === 'static' ? undefined : function () { return render({id: id, key: key}); }), options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, key: key}); } })
+                return h( Field, { id: id, type: type, title: title, value: row[id], render: render ? (type === 'static' ? undefined : function () { return render({id: id, key: key}); }) : undefined, options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, key: key}); } })
               }),
 
             h( 'div', { class: "text-right" },
