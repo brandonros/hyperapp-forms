@@ -12,24 +12,6 @@ import Field from './components/Field.jsx'
 import Fields from './components/Fields.jsx'
 import FieldsArray from './components/FieldsArray.jsx'
 
-console.log({
-  /* actions */
-  addObjectToArray,
-  removeObjectFromArray,
-  updateArrayField,
-  updateField,
-
-  /* compoents */
-  CheckboxField,
-  NumberField,
-  SelectField,
-  StaticField,
-  TextField,
-  Field,
-  Fields,
-  FieldsArray
-})
-
 export default {
   /* actions */
   addObjectToArray,
