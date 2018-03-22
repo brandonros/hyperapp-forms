@@ -2,7 +2,7 @@
   "name": "hyperapp-forms",
   "version": "1.0.0",
   "description": "hyperapp forms library",
-  "main": "src/index.jsx",
+  "main": "dist/index.js",
   "author": {
     "name": "Brandon Ros"
   },
