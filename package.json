@@ -1,0 +1,13 @@
+{
+  "name": "hyperapp-forms",
+  "version": "1.0.0",
+  "description": "hyperapp forms library",
+  "main": "index.js",
+  "author": {
+    "name": "Brandon Ros"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "hyperapp": "^1.2.0"
+  }
+}
