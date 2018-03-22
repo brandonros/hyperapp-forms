@@ -1,8 +1,8 @@
 export default ({key, id, index}) => (
   (state, actions) => {
-    var change = {
+    let change = {
       model: state.model
-    };
+    }
 
     change.model[key] = [].concat(state.model[key])
 

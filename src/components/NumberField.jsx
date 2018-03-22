@@ -2,15 +2,21 @@
 
 import { h } from 'hyperapp'
 
-export default ({ id, title, value, disabled, style, onChange }) => (state, actions) => (
-  <div class="form-group">
-    <label >{title}</label>
-    <input class="form-control" 
-           type="number" 
-           id={id} 
-           value={value} 
-           style={style}
-           disabled={disabled ? 'disabled' : ''} 
-           onkeyup={onChange} />
-  </div>
-)
+export default ({ id, title, value, disabled, render, style, onChange }) => (state, actions) => {
+  if (typeof render === 'function') {
+    value = render(state)
+  }
+
+  return (
+    <div class="form-group">
+      <label >{title}</label>
+      <input class="form-control" 
+             type="number" 
+             id={id} 
+             value={value} 
+             style={style}
+             disabled={disabled ? 'disabled' : ''} 
+             onkeyup={onChange} />
+    </div>
+  )
+}

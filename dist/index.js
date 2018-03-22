@@ -114,12 +114,18 @@
     var style = ref.style;
     var onChange = ref.onChange;
 
-    return function (state, actions) { return (
-    h( 'div', { class: "form-group" },
-      h( 'label', null, title ),
-      h( 'input', { class: "form-control", type: "checkbox", id: id, style: style, checked: value ? 'checked' : '', disabled: disabled ? 'disabled' : '', onchange: onChange })
+    return function (state, actions) {
+    if (typeof render === 'function') {
+      value = render(state);
+    }
+
+    return (
+      h( 'div', { class: "form-group" },
+        h( 'label', null, title ),
+        h( 'input', { class: "form-control", type: "checkbox", id: id, style: style, checked: value ? 'checked' : '', disabled: disabled ? 'disabled' : '', onchange: onChange })
+      )
     )
-  ); };
+  };
   }
 
   // @jsx h 
@@ -129,15 +135,22 @@
     var title = ref.title;
     var value = ref.value;
     var disabled = ref.disabled;
+    var render = ref.render;
     var style = ref.style;
     var onChange = ref.onChange;
 
-    return function (state, actions) { return (
-    h( 'div', { class: "form-group" },
-      h( 'label', null, title ),
-      h( 'input', { class: "form-control", type: "number", id: id, value: value, style: style, disabled: disabled ? 'disabled' : '', onkeyup: onChange })
+    return function (state, actions) {
+    if (typeof render === 'function') {
+      value = render(state);
+    }
+
+    return (
+      h( 'div', { class: "form-group" },
+        h( 'label', null, title ),
+        h( 'input', { class: "form-control", type: "number", id: id, value: value, style: style, disabled: disabled ? 'disabled' : '', onkeyup: onChange })
+      )
     )
-  ); };
+  };
   }
 
   // @jsx h 
@@ -157,18 +170,18 @@
       options = render(state);
     }
 
-    console.log(id, render, state, options);
-
-    return (h( 'div', { class: "form-group" },
-      h( 'label', null, title ),
-      h( 'select', { class: "form-control", id: id, style: style, disabled: disabled ? 'disabled' : '', onchange: onChange },
-        [].concat('', options).map(function (option) { return (
-            h( 'option', { value: typeof option === 'object' ? option.name : option, selected: (typeof option === 'object' ? option.name : option) === value ? 'selected' : '' },
-              typeof option === 'object' ? option.name : option
-            )
-          ); })
+    return (
+      h( 'div', { class: "form-group" },
+        h( 'label', null, title ),
+        h( 'select', { class: "form-control", id: id, style: style, disabled: disabled ? 'disabled' : '', onchange: onChange },
+          [].concat('', options).map(function (option) { return (
+              h( 'option', { value: typeof option === 'object' ? option.name : option, selected: (typeof option === 'object' ? option.name : option) === value ? 'selected' : '' },
+                typeof option === 'object' ? option.name : option
+              )
+            ); })
+        )
       )
-    ))
+    )
   };
   }
 
@@ -186,10 +199,12 @@
       value = render(state);
     }
     
-    return (h( 'div', { class: "form-group" },
-      h( 'label', null, title ),
-      h( 'span', { class: "static-field", style: style, id: id }, value)
-    ))
+    return (
+      h( 'div', { class: "form-group" },
+        h( 'label', null, title ),
+        h( 'span', { class: "static-field", style: style, id: id }, value)
+      )
+    )
   };
   }
 
@@ -201,14 +216,21 @@
     var value = ref.value;
     var disabled = ref.disabled;
     var style = ref.style;
+    var render = ref.render;
     var onChange = ref.onChange;
 
-    return function (state, actions) { return (
-    h( 'div', { class: "form-group" },
-      h( 'label', null, title ),
-      h( 'input', { class: "form-control", type: "text", id: id, value: value, onkeyup: onChange, style: style, disabled: disabled ? 'disabled' : '' })
+    return function (state, actions) {
+    if (typeof render === 'function') {
+      value = render(state);
+    }
+
+    return (
+      h( 'div', { class: "form-group" },
+        h( 'label', null, title ),
+        h( 'input', { class: "form-control", type: "text", id: id, value: value, onkeyup: onChange, style: style, disabled: disabled ? 'disabled' : '' })
+      )
     )
-  ); };
+  };
   }
 
   // @jsx h 
