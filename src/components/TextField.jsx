@@ -2,7 +2,7 @@
 
 import { h } from 'hyperapp'
 
-export default = ({ id, title, value, disabled, style, onChange }) => (state, actions) => (
+export default ({ id, title, value, disabled, style, onChange }) => (state, actions) => (
   <div class="form-group">
     <label >{title}</label>
     <input class="form-control" 

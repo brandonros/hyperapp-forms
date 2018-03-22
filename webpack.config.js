@@ -1,6 +1,8 @@
 module.exports = {
-  entry: './src/index.js',
-  output: { filename: 'lib/index.js' },
+  entry: './src/index.jsx',
+  output: { 
+    filename: 'index.js' 
+  },
   mode: 'development',
   module: {
     rules: [
