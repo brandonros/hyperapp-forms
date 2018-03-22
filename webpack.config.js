@@ -1,7 +1,8 @@
 module.exports = {
   entry: './src/index.js',
   output: { 
-    filename: 'index.js' 
+    filename: 'index.js' ,
+    libraryExport: 'default'
   },
   mode: 'development',
   module: {
