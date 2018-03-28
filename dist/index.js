@@ -4,20 +4,20 @@
   (global['hyperapp-forms'] = factory());
 }(this, (function () { 'use strict';
 
-  function addObjectToArray (key) { return (
+  function addObjectToArray (modelKey) { return (
     function (state, actions) {
       var change = {
         model: state.model
       };
 
-      change.model[key] = [].concat(state.model[key], {});
+      change.model[modelKey] = [].concat(state.model[modelKey], {});
 
       return change
     }
   ); }
 
   function removeObjectFromArray (ref) {
-    var key = ref.key;
+    var modelKey = ref.modelKey;
     var index = ref.index;
 
     return (
@@ -26,12 +26,12 @@
         model: state.model
       };
 
-      change.model[key] = state.model[key];
+      change.model[modelKey] = state.model[modelKey];
 
-      if (state.model[key].length > 1) {
-        change.model[key] = [].concat(state.model[key].slice(0, index), state.model[key].slice(index + 1));
+      if (state.model[modelKey].length > 1) {
+        change.model[modelKey] = [].concat(state.model[modelKey].slice(0, index), state.model[modelKey].slice(index + 1));
       } else {
-        change.model[key][index] = {};
+        change.model[modelKey][index] = {};
       }
 
       return change
@@ -40,7 +40,7 @@
   }
 
   function updateArrayField (ref) {
-    var key = ref.key;
+    var modelKey = ref.modelKey;
     var id = ref.id;
     var type = ref.type;
     var index = ref.index;
@@ -51,7 +51,7 @@
         model: state.model
       };
 
-      change.model[key] = state.model[key];
+      change.model[modelKey] = state.model[modelKey];
 
       var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 
@@ -59,7 +59,7 @@
         value = parseFloat(value);
       }
 
-      change.model[key][index][id] = value;
+      change.model[modelKey][index][id] = value;
 
       return change
     }
@@ -67,7 +67,7 @@
   }
 
   function updateField (ref) {
-    var key = ref.key;
+    var modelKey = ref.modelKey;
     var type = ref.type;
     var id = ref.id;
 
@@ -83,7 +83,7 @@
         value = parseFloat(value);
       }
 
-      change.model[key][id] = value;
+      change.model[modelKey][id] = value;
       
       return change
     }
@@ -291,7 +291,7 @@
     var model = ref.model;
     var fields = ref.fields;
     var onChange = ref.onChange;
-    var key = ref.key;
+    var modelKey = ref.modelKey;
 
     return function (state, actions) { return (
     h( 'div', { class: "form-inline" },
@@ -311,7 +311,7 @@
             return h( 'br', null );
           }
 
-          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render ? render({id: id, key: key}) : undefined, disabled: disabled, style: style, numeric: numeric, positions: positions, onChange: type === 'static' ? undefined : function () { return onChange({id: id, type: type, key: key}); } }))
+          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render ? render({id: id, modelKey: modelKey}) : undefined, disabled: disabled, style: style, numeric: numeric, positions: positions, onChange: type === 'static' ? undefined : function () { return onChange({id: id, type: type, modelKey: modelKey}); } }))
         })
     )
   ); };
@@ -324,7 +324,7 @@
     var fields = ref.fields;
     var onChange = ref.onChange;
     var remove = ref.remove;
-    var key = ref.key;
+    var modelKey = ref.modelKey;
 
     return function (state, actions) { return (
     h( 'div', { class: "form-inline" },
@@ -347,12 +347,12 @@
                 }
 
                 return (
-                  h( Field, { id: id, type: type, title: title, value: row[id], render: render ? render({id: id, key: key, index: index}) : undefined, options: options, disabled: disabled, style: style, numeric: numeric, positions: positions, onChange: function () { return onChange({id: id, index: index, type: type, key: key}); } })
+                  h( Field, { id: id, type: type, title: title, value: row[id], render: render ? render({id: id, modelKey: modelKey, index: index}) : undefined, options: options, disabled: disabled, style: style, numeric: numeric, positions: positions, onChange: function () { return onChange({id: id, index: index, type: type, modelKey: modelKey}); } })
                 )
               }),
 
             h( 'div', { class: "text-right" },
-              h( 'button', { type: "button", class: "btn btn-link", onclick: function () { return remove({key: key, index: index}); } }, "Remove")
+              h( 'button', { type: "button", class: "btn btn-link", onclick: function () { return remove({modelKey: modelKey, index: index}); } }, "Remove")
             )
           )
         ); })

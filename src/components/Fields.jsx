@@ -4,7 +4,7 @@ import { h } from 'hyperapp'
 
 import Field from './Field.jsx'
 
-export default ({model, fields, onChange, key}) => (state, actions) => (
+export default ({model, fields, onChange, modelKey}) => (state, actions) => (
   <div class="form-inline">
     {
       fields.map(({id, type, title, value, options, disabled, style, numeric, positions, render}, index) => {
@@ -17,12 +17,12 @@ export default ({model, fields, onChange, key}) => (state, actions) => (
                        title={title} 
                        value={model[id]} 
                        options={options} 
-                       render={render ? render({id, key}) : undefined}
+                       render={render ? render({id, modelKey}) : undefined}
                        disabled={disabled} 
                        style={style}
                        numeric={numeric}
                        positions={positions}
-                       onChange={type === 'static' ? undefined : () => onChange({id, type, key})} />)
+                       onChange={type === 'static' ? undefined : () => onChange({id, type, modelKey})} />)
       })
     }
   </div>

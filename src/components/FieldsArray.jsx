@@ -4,7 +4,7 @@ import { h } from 'hyperapp'
 
 import Field from './Field.jsx'
 
-export default ({model, fields, onChange, remove, key}) => (state, actions) => (
+export default ({model, fields, onChange, remove, modelKey}) => (state, actions) => (
   <div class="form-inline">
     {
       model.map((row, index) => (
@@ -20,13 +20,13 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
                        type={type} 
                        title={title} 
                        value={row[id]} 
-                       render={render ? render({id, key, index}) : undefined}
+                       render={render ? render({id, modelKey, index}) : undefined}
                        options={options} 
                        disabled={disabled}
                        style={style} 
                        numeric={numeric}
                        positions={positions}
-                       onChange={() => onChange({id, index, type, key})} />
+                       onChange={() => onChange({id, index, type, modelKey})} />
               )
             })
           }
@@ -34,7 +34,7 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
           <div class="text-right">
             <button type="button" 
                     class="btn btn-link" 
-                    onclick={() => remove({key, index})}>Remove</button>
+                    onclick={() => remove({modelKey, index})}>Remove</button>
           </div>
         </div>
       ))

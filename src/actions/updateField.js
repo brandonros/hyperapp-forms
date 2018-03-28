@@ -1,4 +1,4 @@
-export default ({key, type, id}) => (
+export default ({modelKey, type, id}) => (
   (state, actions) => {
     let change = {
       model: state.model
@@ -10,7 +10,7 @@ export default ({key, type, id}) => (
       value = parseFloat(value)
     }
 
-    change.model[key][id] = value
+    change.model[modelKey][id] = value
     
     return change
   }
