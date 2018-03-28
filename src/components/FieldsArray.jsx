@@ -10,7 +10,7 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
       model.map((row, index) => (
         <div>
           {
-            fields.map(({id, type, title, value, disabled, style, options, render}) => {
+            fields.map(({id, type, title, value, disabled, style, options, numeric, positions, render}) => {
               if (type === 'divider') {
                 return <br />;
               }
@@ -24,6 +24,8 @@ export default ({model, fields, onChange, remove, key}) => (state, actions) => (
                        options={options} 
                        disabled={disabled}
                        style={style} 
+                       numeric={numeric}
+                       positions={positions}
                        onChange={() => onChange({id, index, type, key})} />
               )
             })

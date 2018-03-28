@@ -2,9 +2,13 @@
 
 import { h } from 'hyperapp'
 
-export default ({ id, title, value, render, style }) => (state, actions) => {
+export default ({ id, title, value, render, numeric, positions, style }) => (state, actions) => {
   if (typeof render === 'function') {
     value = render(state)
+
+    if (numeric) {
+      value = value.toFixed(positions)
+    }
   }
   
   return (

@@ -7,7 +7,7 @@ import Field from './Field.jsx'
 export default ({model, fields, onChange, key}) => (state, actions) => (
   <div class="form-inline">
     {
-      fields.map(({id, type, title, value, options, disabled, style, render}, index) => {
+      fields.map(({id, type, title, value, options, disabled, style, numeric, positions, render}, index) => {
         if (type === 'divider') {
           return <br />;
         }
@@ -20,6 +20,8 @@ export default ({model, fields, onChange, key}) => (state, actions) => (
                        render={render ? render({id, key}) : undefined}
                        disabled={disabled} 
                        style={style}
+                       numeric={numeric}
+                       positions={positions}
                        onChange={type === 'static' ? undefined : () => onChange({id, type, key})} />)
       })
     }

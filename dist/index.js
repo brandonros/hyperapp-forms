@@ -30,6 +30,8 @@
 
       if (state.model[key].length > 1) {
         change.model[key] = [].concat(state.model[key].slice(0, index), state.model[key].slice(index + 1));
+      } else {
+        change.model[key][index] = {};
       }
 
       return change
@@ -49,7 +51,7 @@
         model: state.model
       };
 
-      change.model[key] = [].concat(state.model[key]);
+      change.model[key] = state.model[key];
 
       var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 
@@ -206,11 +208,17 @@
     var title = ref.title;
     var value = ref.value;
     var render = ref.render;
+    var numeric = ref.numeric;
+    var positions = ref.positions;
     var style = ref.style;
 
     return function (state, actions) {
     if (typeof render === 'function') {
       value = render(state);
+
+      if (numeric) {
+        value = value.toFixed(positions);
+      }
     }
     
     return (
@@ -258,11 +266,13 @@
     var disabled = ref.disabled;
     var style = ref.style;
     var render = ref.render;
+    var numeric = ref.numeric;
+    var positions = ref.positions;
     var onChange = ref.onChange;
 
     return function (state, actions) {
     if (type === 'static') {
-      return h( StaticField, { id: id, title: title, value: value, style: style, render: render })
+      return h( StaticField, { id: id, title: title, value: value, style: style, numeric: numeric, positions: positions, render: render })
     } else if (type === 'text') {
       return h( TextField, { id: id, title: title, value: value, disabled: disabled, render: render, style: style, onChange: onChange })
     } else if (type === 'checkbox') {
@@ -293,13 +303,15 @@
           var options = ref.options;
           var disabled = ref.disabled;
           var style = ref.style;
+          var numeric = ref.numeric;
+          var positions = ref.positions;
           var render = ref.render;
 
           if (type === 'divider') {
             return h( 'br', null );
           }
 
-          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render ? render({id: id, key: key}) : undefined, disabled: disabled, style: style, onChange: type === 'static' ? undefined : function () { return onChange({id: id, type: type, key: key}); } }))
+          return (h( Field, { id: id, type: type, title: title, value: model[id], options: options, render: render ? render({id: id, key: key}) : undefined, disabled: disabled, style: style, numeric: numeric, positions: positions, onChange: type === 'static' ? undefined : function () { return onChange({id: id, type: type, key: key}); } }))
         })
     )
   ); };
@@ -326,6 +338,8 @@
                 var disabled = ref.disabled;
                 var style = ref.style;
                 var options = ref.options;
+                var numeric = ref.numeric;
+                var positions = ref.positions;
                 var render = ref.render;
 
                 if (type === 'divider') {
@@ -333,7 +347,7 @@
                 }
 
                 return (
-                  h( Field, { id: id, type: type, title: title, value: row[id], render: render ? render({id: id, key: key, index: index}) : undefined, options: options, disabled: disabled, style: style, onChange: function () { return onChange({id: id, index: index, type: type, key: key}); } })
+                  h( Field, { id: id, type: type, title: title, value: row[id], render: render ? render({id: id, key: key, index: index}) : undefined, options: options, disabled: disabled, style: style, numeric: numeric, positions: positions, onChange: function () { return onChange({id: id, index: index, type: type, key: key}); } })
                 )
               }),
 

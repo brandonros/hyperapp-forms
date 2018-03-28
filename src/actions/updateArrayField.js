@@ -4,7 +4,7 @@ export default ({key, id, type, index}) => (
       model: state.model
     }
 
-    change.model[key] = [].concat(state.model[key])
+    change.model[key] = state.model[key]
 
     let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
 

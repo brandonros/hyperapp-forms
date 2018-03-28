@@ -8,6 +8,8 @@ export default ({key, index}) => (
 
     if (state.model[key].length > 1) {
       change.model[key] = [].concat(state.model[key].slice(0, index), state.model[key].slice(index + 1))
+    } else {
+      change.model[key][index] = {}
     }
 
     return change
